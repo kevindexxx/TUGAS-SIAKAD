@@ -99,9 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <a onclick="loadPage('grafik.php')" class="nav-link" >
                     <img src="icons/student.png" width="30px" alt="Mahasiswa"> grafik
                 </a>
-                <a onclick="loadPage('laporan.php')" class="nav-link" >
-                    <img src="icons/student.png" width="30px" alt="Mahasiswa"> laporan
-                </a>
+                
 
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
