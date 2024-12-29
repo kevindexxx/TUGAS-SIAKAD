@@ -9,9 +9,8 @@ $result = $conn->query($query);
     <title>Data Mahasiswa</title>
 </head>
 <body>
-    <h1>Data Mahasiswa</h1>
-    <h1>Data Mahasiswa</h1>
-    <a href="tambah.php">Tambah Data</a>
+    <h1>Data Mahasiswa</h1> 
+    <a onclick="loadPage('tambah.php')">Tambah Data</a>
     <table border="1" cellpadding="5">
         <thead>
             <tr>
