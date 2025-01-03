@@ -12,7 +12,7 @@ $page = max($page, 1); // Pastikan halaman minimal 1
 $offset = ($page - 1) * $dataPerPage;
 
 // Hitung total data
-$totalDataQuery = "SELECT COUNT(*) AS total FROM dosen";
+$totalDataQuery = "SELECT COUNT(*) AS total FROM matakuliah";
 $totalDataResult = $conn->query($totalDataQuery);
 $totalDataRow = $totalDataResult->fetch_assoc();
 $totalData = $totalDataRow['total'];
@@ -21,7 +21,7 @@ $totalData = $totalDataRow['total'];
 $totalPages = ceil($totalData / $dataPerPage);
 
 // Ambil data untuk halaman saat ini
-$query = "SELECT * FROM dosen LIMIT $dataPerPage OFFSET $offset";
+$query = "SELECT a.kode_mk, a.nama_matkul, a.sks, b.nama as nama_mahasiswa, c.nama as nama_dosen FROM matakuliah as a left join mahasiswa as b on a.nim = b.nim left join dosen as c on a.nip = c.nip LIMIT $dataPerPage OFFSET $offset";
 $result = $conn->query($query);
 ?>
 
@@ -29,34 +29,30 @@ $result = $conn->query($query);
 // Memasukkan file header
 include 'htmlBuka.php';
 ?>
-<h1>Data Dosen</h1>
-<a href="tambahDosen.php" class="btn btn-primary">Tambah Data</a>
-<table class="table table-bordered border-primary table-hover" border="1" cellpadding="5">
+<h1>Laporan</h1>
+<table class="table table-bordered border-primary table-hover">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>NIP</th>
-            <th>Nama</th>
-            <th>Alamat</th>
-            <th>Prodi</th>
-            <th>Jabatan</th>
-            <th>Aksi</th>
+            <th>No</th>
+            <th>KODE MATKUL</th>
+            <th>NAMA MATKUL</th>
+            <th>SKS</th>
+            <th>NAMA MAHASISWA</th>
+            <th>NAMA DOSEN</th>
         </tr>
     </thead>
     <tbody>
-        <?php while ($row = $result->fetch_assoc()) { ?>
+        <?php $urutan = 1; ?>
+        <?php while ($row = $result->fetch_assoc()) {?>
         <tr>
-            <td><?= $row['id']; ?></td>
-            <td><?= $row['nip']; ?></td>
-            <td><?= $row['nama']; ?></td>
-            <td><?= $row['alamat']; ?></td>
-            <td><?= $row['prodi']; ?></td>
-            <td><?= $row['jabatan']; ?></td>
-            <td>
-                <a href="editDosen.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-success">Edit</a>
-                <a href="hapusDosen.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</a>
-            </td>
-        </tr>
+            <td><?= $urutan ?></td>
+            <td><?= $row['kode_mk']; ?></td>
+            <td><?= $row['nama_matkul']; ?></td>
+            <td><?= $row['sks']; ?></td>
+            <td><?= $row['nama_mahasiswa']; ?></td>
+            <td><?= $row['nama_dosen']; ?></td>
+    
+            <?php $urutan++; ?>
         <?php } ?>
     </tbody>
 </table>

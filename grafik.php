@@ -1,3 +1,55 @@
+<?php
+include 'koneksi.php';
+
+// Ambil data untuk halaman saat ini
+$nama_mhs = "SELECT nama FROM mahasiswa";
+$spp_mhs = "SELECT spp FROM mahasiswa";
+$nama = $conn->query($nama_mhs);
+$spp = $conn->query($spp_mhs);
+
+$nama_array = $nama->fetch_all(MYSQLI_ASSOC);
+$spp_array = $spp->fetch_all(MYSQLI_ASSOC);
+
+$nama_flat = array_column($nama_array, 'nama'); // Hasil: ['John', 'Jane']
+$spp_flat = array_column($spp_array, 'spp');   // Hasil: [1000, 2000]
+
+
+
+?>
+
+<?php
+// Memasukkan file header
+include 'htmlBuka.php';
+?>
+<h1>GRAFIK</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+    </div>
+    <div class="card-body">
+        <div class="chart-area">
+            <canvas id="myAreaChart"></canvas>
+        </div>
+    
+    </div>
+</div>
+
+
+
+
+
+<?php
+// Memasukkan file footer
+include 'htmlTutup.php';
+?>
+
+
+<script>
+// Mengambil data dari PHP dan mengubahnya ke JavaScript
+let nama = <?= json_encode($nama_flat) ?>;
+let spp = <?= json_encode($spp_flat) ?>;
+
+    console.log(nama, spp);
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
@@ -32,21 +84,21 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: nama,
     datasets: [{
-      label: "Earnings",
+      label: "SPP",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
       pointRadius: 3,
       pointBackgroundColor: "rgba(78, 115, 223, 1)",
       pointBorderColor: "rgba(78, 115, 223, 1)",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+    //   pointHoverRadius: 3,
+    //   pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+    //   pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: spp,
     }],
   },
   options: {
@@ -78,7 +130,7 @@ var myLineChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return 'Rp. ' + number_format(value);
           }
         },
         gridLines: {
@@ -93,26 +145,9 @@ var myLineChart = new Chart(ctx, {
     legend: {
       display: false
     },
-    tooltips: {
-      backgroundColor: "rgb(255,255,255)",
-      bodyFontColor: "#858796",
-      titleMarginBottom: 10,
-      titleFontColor: '#6e707e',
-      titleFontSize: 14,
-      borderColor: '#dddfeb',
-      borderWidth: 1,
-      xPadding: 15,
-      yPadding: 15,
-      displayColors: false,
-      intersect: false,
-      mode: 'index',
-      caretPadding: 10,
-      callbacks: {
-        label: function(tooltipItem, chart) {
-          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
-        }
-      }
-    }
+    
   }
 });
+
+
+</script>
