@@ -12,7 +12,7 @@ $page = max($page, 1); // Pastikan halaman minimal 1
 $offset = ($page - 1) * $dataPerPage;
 
 // Hitung total data
-$totalDataQuery = "SELECT COUNT(*) AS total FROM dosen";
+$totalDataQuery = "SELECT COUNT(*) AS total FROM matakuliah";
 $totalDataResult = $conn->query($totalDataQuery);
 $totalDataRow = $totalDataResult->fetch_assoc();
 $totalData = $totalDataRow['total'];
@@ -21,7 +21,7 @@ $totalData = $totalDataRow['total'];
 $totalPages = ceil($totalData / $dataPerPage);
 
 // Ambil data untuk halaman saat ini
-$query = "SELECT * FROM dosen LIMIT $dataPerPage OFFSET $offset";
+$query = "SELECT DISTINCT kode_mk, nama_matkul, sks FROM `matakuliah` LIMIT $dataPerPage OFFSET $offset";
 $result = $conn->query($query);
 ?>
 
@@ -29,34 +29,31 @@ $result = $conn->query($query);
 // Memasukkan file header
 include 'htmlBuka.php';
 ?>
-<h1>Data Dosen</h1>
-<a href="tambahDosen.php" class="btn btn-primary">Tambah Data</a>
+<h1>Data Mata Kulyeah</h1>
+<a href="tambahMatkul.php" class="btn btn-primary">Tambah Data Mata Kuliah </a>
 <table class="table table-bordered border-primary table-hover" border="1" cellpadding="5">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>NIP</th>
-            <th>Nama</th>
-            <th>Alamat</th>
-            <th>Prodi</th>
-            <th>Jabatan</th>
+            <th>No</th>
+            <th>KODE MATKUL</th>
+            <th>NAMA MATKUL</th>
+            <th>SKS</th>
             <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
+        <?php $urutan = 1; ?>
         <?php while ($row = $result->fetch_assoc()) { ?>
         <tr>
-            <td><?= $row['id']; ?></td>
-            <td><?= $row['nip']; ?></td>
-            <td><?= $row['nama']; ?></td>
-            <td><?= $row['alamat']; ?></td>
-            <td><?= $row['prodi']; ?></td>
-            <td><?= $row['jabatan']; ?></td>
+            <td><?= $urutan ?></td>
+            <td><?= $row['kode_mk']; ?></td>
+            <td><?= $row['nama_matkul']; ?></td>
+            <td><?= $row['sks']; ?></td>
             <td>
-                <a href="editDosen.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-success">Edit</a>
-                <a href="hapusDosen.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</a>
-            </td>
-        </tr>
+                <a href="editMatkul.php?kode_mk=<?= $row['kode_mk']; ?>" class="btn btn-sm btn-success">Edit</a>
+                <a href="hapusMatkul.php?kode_mk=<?= $row['kode_mk']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</a>
+
+            <?php $urutan++; ?>
         <?php } ?>
     </tbody>
 </table>

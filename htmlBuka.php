@@ -1,3 +1,9 @@
+<?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +15,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>JUDUL MU</title>
+    <title>dashboard</title>
 
     <!-- Custom fonts for this template-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-...your-integrity-hash..." crossorigin="anonymous">
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -31,9 +38,9 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/Pertemuan_11./home.php">
                 <img src="" alt="">
-                <div class="sidebar-brand-text mx-3">JUDUL MU</div>
+                <div class="sidebar-brand-text mx-3">SIM</div>
             </a>
 
             <!-- Divider -->
@@ -46,23 +53,20 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a onclick="loadPage('mahasiswa.php')" class="nav-link" >
+                <a href="/Pertemuan_11/mahasiswa.php" class="nav-link" >
                     <img src="icons/student.png" width="30px" alt="Mahasiswa"> Mahasiswa
                 </a>
-                <a onclick="loadPage('dosen.php')" class="nav-link" >
-                    <img src="icons/student.png" width="30px" alt="Mahasiswa"> Dosen
+                <a href="/Pertemuan_11/dosen.php" class="nav-link" >
+                    <img src="icons/teacher.png" width="30px" alt="Mahasiswa"> Dosen
                 </a>
-                <a onclick="loadPage('matakuliah.php')" class="nav-link" >
-                    <img src="icons/student.png" width="30px" alt="Mahasiswa"> Mata kuliah
+                <a href="/Pertemuan_11/mataKuliah.php" class="nav-link" >
+                    <img src="icons/subjects.png" width="30px" alt="Mahasiswa"> Mata kuliah
                 </a>
-                <a onclick="loadPage('laporan.php')" class="nav-link" >
-                    <img src="icons/student.png" width="30px" alt="Mahasiswa"> laporan
+                <a href="/Pertemuan_11/laporan.php" class="nav-link" >
+                    <img src="icons/seo-report.png" width="30px" alt="Mahasiswa"> laporan
                 </a>
-                <a onclick="loadPage('grafik.php')" class="nav-link" >
-                    <img src="icons/student.png" width="30px" alt="Mahasiswa"> grafik
-                </a>
-                <a onclick="loadPage('laporan.php')" class="nav-link" >
-                    <img src="icons/student.png" width="30px" alt="Mahasiswa"> laporan
+                <a href="/Pertemuan_11/grafik.php"class="nav-link" >
+                    <img src="icons/chart.png" width="30px" alt="Mahasiswa"> grafik
                 </a>
 
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -91,7 +95,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Navbar -->
+                    <!-- Topbar Navbar --> 
                     <ul class="navbar-nav ml-auto">
 
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -100,7 +104,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo htmlspecialchars($_SESSION['username']); ?> </span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -128,4 +132,4 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div >
