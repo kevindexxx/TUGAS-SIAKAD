@@ -21,14 +21,21 @@ $totalData = $totalDataRow['total'];
 $totalPages = ceil($totalData / $dataPerPage);
 
 // Ambil data untuk halaman saat ini
-$query = "SELECT a.kode_mk, a.nama_matkul, a.sks, b.nama as nama_mahasiswa, c.nama as nama_dosen FROM matakuliah as a left join mahasiswa as b on a.nim = b.nim left join dosen as c on a.nip = c.nip LIMIT $dataPerPage OFFSET $offset";
+$query = "
+    SELECT 
+        a.kode_mk, 
+        a.nama_matkul, 
+        a.sks, 
+        b.nama AS nama_mahasiswa, 
+        c.nama AS nama_dosen 
+    FROM matakuliah AS a
+    LEFT JOIN mahasiswa AS b ON a.nim = b.nim
+    LEFT JOIN dosen AS c ON a.nip = c.nip
+    LIMIT $dataPerPage OFFSET $offset";
 $result = $conn->query($query);
 ?>
 
-<?php
-// Memasukkan file header
-include 'htmlBuka.php';
-?>
+<?php include 'htmlBuka.php'; ?>
 <h1>Laporan</h1>
 <table class="table table-bordered border-primary table-hover">
     <thead>
@@ -43,17 +50,17 @@ include 'htmlBuka.php';
     </thead>
     <tbody>
         <?php $urutan = 1; ?>
-        <?php while ($row = $result->fetch_assoc()) {?>
+        <?php while ($row = $result->fetch_assoc()): ?>
         <tr>
-            <td><?= $urutan ?></td>
+            <td><?= $urutan; ?></td>
             <td><?= $row['kode_mk']; ?></td>
             <td><?= $row['nama_matkul']; ?></td>
             <td><?= $row['sks']; ?></td>
-            <td><?= $row['nama_mahasiswa']; ?></td>
-            <td><?= $row['nama_dosen']; ?></td>
-    
-            <?php $urutan++; ?>
-        <?php } ?>
+            <td><?= $row['nama_mahasiswa'] ?: '-'; ?></td> <!-- Nama Mahasiswa -->
+            <td><?= $row['nama_dosen'] ?: '-'; ?></td> <!-- Nama Dosen -->
+        </tr>
+        <?php $urutan++; ?>
+        <?php endwhile; ?>
     </tbody>
 </table>
 
@@ -79,9 +86,4 @@ include 'htmlBuka.php';
         <?php endif; ?>
     </ul>
 </div>
-
-
-<?php
-// Memasukkan file footer
-include 'htmlTutup.php';
-?>
+<?php include 'htmlTutup.php'; ?>

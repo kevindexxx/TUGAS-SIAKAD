@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 include 'htmlBuka.php';
 ?>
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Edit Data Dosen</h1>
+    <h1 class="text-center mb-4">Edit Data Matkul</h1>
     <form method="POST" class="shadow p-4 rounded bg-light">
         <div class="mb-3">
             <label for="kode_mk" class="form-label">Kode Matkul:</label>
