@@ -37,7 +37,7 @@ include 'htmlBuka.php';
             <th>KODE MATKUL</th>
             <th>NAMA MATKUL</th>
             <th>SKS</th>
-            <th>NAMA MAHASISWA</th>
+            <th>NAMA MAHASISWA</th> 
             <th>NAMA DOSEN</th>
         </tr>
     </thead>
