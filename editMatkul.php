@@ -32,7 +32,7 @@ include 'htmlBuka.php';
     <form method="POST" class="shadow p-4 rounded bg-light">
         <div class="mb-3">
             <label for="kode_mk" class="form-label">Kode Matkul:</label>
-            <input readonly type="number" id="kode_mk" name="kode_mk" class="form-control" value="<?= htmlspecialchars($row['kode_mk']); ?>" required>
+            <input type="number" id="kode_mk" name="kode_mk" class="form-control" value="<?= htmlspecialchars($row['kode_mk']); ?>" required>
         </div>
         <div class="mb-3">
             <label for="nama_matkul" class="form-label">Nama Matkul:</label>

@@ -61,7 +61,7 @@ include 'htmlBuka.php';
     <form method="POST" class="shadow p-4 rounded bg-light" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="nim" class="form-label">NIM:</label>
-            <input type="text" id="nim" name="nim" class="form-control" value="<?= htmlspecialchars($row['nim']); ?>" required>
+            <input type="text" readonly id="nim" name="nim" class="form-control" value="<?= htmlspecialchars($row['nim']); ?>" required>
         </div>
         <div class="mb-3">
             <label for="nama" class="form-label">Nama:</label>

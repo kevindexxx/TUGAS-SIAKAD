@@ -55,7 +55,6 @@ include 'htmlBuka.php';
             <td><?= $row['prodi']; ?></td>
             <td><a href="uploads/<?= $row['file_ijazah']; ?>" target="_blank">Lihat</a></td>
             <td>
-                <a href="tambahMatkulMhs.php?nim=<?= $row['nim']; ?>" class="btn btn-primary btn-sm">Tambah</a>
                 <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-success btn-sm">Edit</a>
                 <a href="hapus.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin ingin menghapus data ini?')">Hapus</a>
             </td>

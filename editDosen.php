@@ -34,7 +34,7 @@ include 'htmlBuka.php';
     <form method="POST" class="shadow p-4 rounded bg-light">
         <div class="mb-3">
             <label for="nip" class="form-label">NIP:</label>
-            <input type="text" id="nip" name="nip" class="form-control" value="<?= htmlspecialchars($row['nip']); ?>" required>
+            <input type="text" readonly id="nip" name="nip" class="form-control" value="<?= htmlspecialchars($row['nip']); ?>" required>
         </div>
         <div class="mb-3">
             <label for="nama" class="form-label">Nama:</label>
