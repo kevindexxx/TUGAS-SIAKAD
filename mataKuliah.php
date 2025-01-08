@@ -29,7 +29,7 @@ $result = $conn->query($query);
 // Memasukkan file header
 include 'htmlBuka.php';
 ?>
-<h1>Data Mata Kulyeah</h1>
+<h1>Data Mata Kuliah</h1>
 <a href="tambahMatkul.php" class="btn btn-primary">Tambah Data Mata Kuliah </a>
 <table class="table table-bordered border-primary table-hover" border="1" cellpadding="5">
     <thead>
